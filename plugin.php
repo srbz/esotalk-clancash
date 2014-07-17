@@ -17,31 +17,41 @@ ET::$pluginInfo["ClanCash"] = array(
 
 class ETPlugin_ClanCash extends ETPlugin
 {
-    function boot()
+    public function __construct($rootDirectory)
     {
-        //TODO register classes in factory
-    }
+        parent::__construct($rootDirectory);
 
-    function init()
+    }
+    public function handler_init($sender)
     {
-        //TODO define default lang. translation
-        //TODO register lables, gambits, activity types and last action types
-        //TODO include and override render functions
-    }
 
-    function setup($version)
+    }
+    public function handler_initAdmin($sender)
+    {
+
+    }
+    
+    public function setup($oldVersion = "")
     {
         //TODO use version to compare to old verisons and follow-up tasks
         //TODO manipulate db schema and init filesystem structues
+        $structure = ET::$database->structure();
+        $structure->table("eso_clancash")
+            ->column("id", "int(11) unsigned", false)
+            ->column("")
+        return true;
     }
 
-    function disable()
+    public function disable()
     {
-        //TODO non-destructive cleanup tasks
+        return true;
     }
 
-    function uninstall()
+    public function uninstall()
     {
-        //TODO cleanup tasks like removing db tables
+        $structure = ET::$database->structure();
+        //DROP TABLE "eso_clancash"
+        $structure->table("eso_clancash")->drop();
+        return true;
     }
 }
