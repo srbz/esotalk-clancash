@@ -2,7 +2,7 @@
 
 if(!defined("IN_ESOTALK")) exit;
 
-class TransactionModel extends ETModel
+class TransactionAdminModel extends ETModel
 {
     public function __construct()
     {
@@ -21,8 +21,15 @@ class TransactionModel extends ETModel
         $res = ET::$database->query("SELECT TRUNCATE(SUM(value),2) AS netSum FROM et_clancash")->firstRow();
         return $res;
     }
-    public function getSome()
+    public function setData($values)
     {
-        //TODO i want some pageination stuff be included in the view first.
+        /*
+        *    TODO? not sure if i need to implement this method at the moment
+        *    id - int
+        *    memberId - int
+        *    transactionDate - date
+        *    description - string
+        *    value - double
+        */
     }
 }

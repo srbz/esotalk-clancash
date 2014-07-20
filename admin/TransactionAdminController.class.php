@@ -2,24 +2,29 @@
 
 if(!defined("IN_ESOTALK")) exit;
 
-class TransactionAdminController extends ETController
+class TransactionAdminController extends ETAdminController
 {
-    //http://localhost/esoTalk/transaction cannot be called... hm?
+    //http://localhost/esoTalk/admin/transactionAdmin cannot be called... hm?
     public function action_index()
     {
         if (!$this->allowed()) return;
-        $model = ETFactory::make("transactionAdminModel");
-        $results = $model->getLastTen();
-        $sum = $model->getNetSum();
+        $transModel = ETFactory::make("transactionAdminModel");
+        $reoccModel = ETFactory::make("transactionAdminReoccuringModel");
+        $results = $transModel->getLastTen();
+        $reocc = $reoccModel->getReoccuringTransactions();
+        $sum = $transModel->getNetSum();
+        $reoccSum = $reoccModel->getNetSumPerReocc();
         $this->data("netSum",$sum);
         $this->data("trans",$results);
-        $this->render("TransactionAdminIndexView");
+        $this->data("reocc",$reocc);
+        $this->data("reoccSum", $reoccSum);
+        $this->render("admin/TransactionAdminIndexView");
     }
-    public function action_edit($data)
+    public function action_edit($id)
     {
 
     }
-    public function action_delete($data)
+    public function action_delete($id)
     {
 
     }
@@ -27,6 +32,21 @@ class TransactionAdminController extends ETController
     {
 
     }
+    public function action_addReocc($data)
+    {
 
+    }
+    public function action_delReocc($data)
+    {
+
+    }
+    public function action_editReocc($data)
+    {
+
+    }
+    public function checkReoccuring()
+    {
+
+    }
 
 }

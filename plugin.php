@@ -20,10 +20,12 @@ class ETPlugin_ClanCash extends ETPlugin
     public function __construct($rootDirectory)
     {
         parent::__construct($rootDirectory);
-        //TODO does this work?
+        //TODO does this work? correctly for admincontroller?
         ETFactory::register("transactionModel", "TransactionModel", dirname(__FILE__)."/TransactionModel.class.php");
         ETFactory::registerController("transaction", "TransactionController", dirname(__FILE__)."/TransactionController.class.php");
-        ETFactory::registerAdminController("transactionAdmin", "TransactionAdminController", dirname(__FILE__)."/admin/TransactionAdminController.class.php");
+        ETFactory::registerAdminController("transaction", "TransactionAdminController", dirname(__FILE__)."/admin/TransactionAdminController.class.php");
+        ETFactory::register("transactionAdminModel", "TransactionAdminModel", dirname(__FILE__)."/admin/TransactionAdminModel.class.php");
+        ETFactory::register("transactionAdminReoccuringModel", "TransactionAdminReoccuringModel", dirname(__FILE__)."/admin/TransactionAdminReoccuringModel.class.php");
     }
     public function handler_init($sender)
     {
@@ -36,7 +38,7 @@ class ETPlugin_ClanCash extends ETPlugin
     public function handler_initAdmin($sender, $menu)
     {
         //adds the admin menu for administration of transactions
-        $menu->add("transaction", "<a href='".URL("admin/transactionAdmin")."'><i class='icon-pencil'></i> ".T("Transactions")."</a>");
+        $menu->add("transaction", "<a href='".URL("admin/transaction")."'><i class='icon-pencil'></i> ".T("Transactions")."</a>");
     }
 
     public function setup($oldVersion = "")
@@ -45,7 +47,7 @@ class ETPlugin_ClanCash extends ETPlugin
         //db structure object
         $structure = ET::$database->structure();
         //if there is no table with name "eso_clancash"
-        if(!$structure->table("eso_clancash")->exists())
+        if(!$structure->table("et_clancash")->exists())
         {
             //create table structure with ...
             $structure->table("clancash")
@@ -61,8 +63,22 @@ class ETPlugin_ClanCash extends ETPlugin
                 ->column("description", "varchar(140)", false)
                 //value of payment double -- dont give double a size like double(11)
                 ->column("value", "double", false)
-                //TODO some stuff for reoccuring payments
                 //do it. -- dont mind the boolean, its fine there.
+                ->exec(false);
+            $structure->table("clancash_reocc")
+                //id unsigned integer not null
+                ->column("id", "int(11) unsigned", false)
+                //id as primary key
+                ->key("id", "primary")
+                //memberId int not null
+                ->column("memberId", "int(11) unsigned", false)
+                //description of transaction
+                ->column("description", "varchar(140)", false)
+                //value of payment double
+                ->column("value", "double", false)
+                //date of next transaction
+                ->column("nextTransactionDate", "date", false)
+                //well you know, read it above...
                 ->exec(false);
             return true;
         }
@@ -76,7 +92,7 @@ class ETPlugin_ClanCash extends ETPlugin
     {
         $structure = ET::$database->structure();
         //DROP TABLE "eso_clancash"
-        $structure->table("eso_clancash")->drop();
+        $structure->table("et_clancash")->drop();
         return true;
     }
 }
