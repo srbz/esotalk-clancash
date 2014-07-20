@@ -8,6 +8,8 @@ How to Install
 
 Warning: There is no functionality added at the moment since this is just the structure of the plugin
 
+Dont install yet! -- seriously.
+
 1. Open up your terminal / command prompt and `cd` to `addons/plugins`
 2. Run `git clone git@github.com:srbz/esotalk-clancash.git ClanCash`
 
@@ -19,7 +21,7 @@ This plugin only depends on the current esoTalk version (1.0.0g4)
 Translation
 ===========
 
-At the moment there are no translation definitions -- since its just the structure.
+At the moment there are no translation definitions -- since its just starting.
 
 License
 =======

@@ -2,32 +2,30 @@
 
 if(!defined("IN_ESOTALK")) exit;
 
-class TransactionController extends ETController
+class TransactionAdminController extends ETController
 {
     //http://localhost/esoTalk/transaction cannot be called... hm?
     public function action_index()
     {
         if (!$this->allowed()) return;
-
-        $model = ETFactory::make("transactionModel");
+        $model = ETFactory::make("transactionAdminModel");
         $results = $model->getLastTen();
         $sum = $model->getNetSum();
         $this->data("netSum",$sum);
         $this->data("trans",$results);
-        $this->render("TransactionIndexView");
-
+        $this->render("TransactionAdminIndexView");
     }
     public function action_edit($data)
     {
-        //TODO
+
     }
     public function action_delete($data)
     {
-        //TODO
+
     }
     public function action_add($data)
     {
-        //TODO
+
     }
 
 
