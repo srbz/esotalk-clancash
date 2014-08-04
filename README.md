@@ -6,12 +6,12 @@ Adds cash management for communities for esoTalk.
 How to Install
 ==============
 
-Warning: There is no functionality added at the moment since this is just the structure of the plugin
+Warning: Functionaliy is already added but its ugly as hell, and some parts need cosmetics because the user wont remember all usernames for example.
 
-Dont install yet! -- seriously.
+Dont install yet! -- seriously. Please!
 
 1. Open up your terminal / command prompt and `cd` to `addons/plugins`
-2. Run `git clone git@github.com:srbz/esotalk-clancash.git ClanCash`
+2. Run `git clone https://github.com/srbz/esotalk-clancash.git ClanCash`
 
 Dependencies
 ============
