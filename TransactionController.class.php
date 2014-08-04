@@ -4,7 +4,7 @@ if(!defined("IN_ESOTALK")) exit;
 
 class TransactionController extends ETController
 {
-    //http://localhost/esoTalk/transaction cannot be called... hm?
+    // transaction/index actionhandler
     public function action_index()
     {
         if (!$this->allowed()) return;
@@ -17,18 +17,5 @@ class TransactionController extends ETController
         $this->render("TransactionIndexView");
 
     }
-    public function action_edit($data)
-    {
-        //TODO
-    }
-    public function action_delete($data)
-    {
-        //TODO
-    }
-    public function action_add($data)
-    {
-        //TODO
-    }
-
-
+    //there is nothing more a simple user could do at the moment
 }

@@ -1,5 +1,5 @@
 <?php
-//copyright 2014 sega|zero
+//copyright 2014 at sexygaming.de
 
 ET::$pluginInfo["ClanCash"] = array(
     "name"        => "ClanCash",
@@ -47,9 +47,9 @@ class ETPlugin_ClanCash extends ETPlugin
         //db structure object
         $structure = ET::$database->structure();
         //if there is no table with name "eso_clancash"
-        if(!$structure->table("et_clancash")->exists())
+        if(!$structure->table("eso_clancash")->exists())
         {
-            //create table structure with ...
+            //payment structure
             $structure->table("clancash")
                 //id unsigned integer not null
                 ->column("id", "int(11) unsigned", false)
@@ -65,6 +65,7 @@ class ETPlugin_ClanCash extends ETPlugin
                 ->column("value", "double", false)
                 //do it. -- dont mind the boolean, its fine there.
                 ->exec(false);
+            //reoccuring structure
             $structure->table("clancash_reocc")
                 //id unsigned integer not null
                 ->column("id", "int(11) unsigned", false)
@@ -85,6 +86,7 @@ class ETPlugin_ClanCash extends ETPlugin
     }
     public function disable()
     {
+        //maybe i'll do something in the future
         return true;
     }
     //function will drop the database when being uninstalled
@@ -92,7 +94,7 @@ class ETPlugin_ClanCash extends ETPlugin
     {
         $structure = ET::$database->structure();
         //DROP TABLE "eso_clancash"
-        $structure->table("et_clancash")->drop();
+        $structure->table("eso_clancash")->drop();
         return true;
     }
 }
